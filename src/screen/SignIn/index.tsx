@@ -3,22 +3,24 @@ import {
   View,
   Text,
   Image,
-  StatusBar,
   ScrollView
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Illustration from '../../assets/illustration.png';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { styles } from './styles';
 
 export function SignIn() {
+  const navigation = useNavigation();
+
+  function handleSigIn() {
+    navigation.navigate('Home');
+  }
+
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle='light-content'
-        backgroundColor='transparent'
-        translucent
-      />
+
       <Image
         source={Illustration}
         style={styles.image}
@@ -34,8 +36,10 @@ export function SignIn() {
           favoritos com seus amigos
         </Text>
 
-        <ButtonIcon title='Entrar com Discord'
+        <ButtonIcon
+          title='Entrar com Discord'
           activeOpacity={0.7}
+          onPress={handleSigIn}
         />
       </View>
     </View>
