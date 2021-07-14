@@ -13,7 +13,7 @@ export function ListHeader({ title, subtitle }: Props) {
       <Text style={styles.title}>
         {title}
       </Text>
-      <Text style={styles.title}>
+      <Text style={styles.subtitle}>
         {subtitle}
       </Text>
     </View>
