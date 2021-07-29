@@ -42,7 +42,7 @@ export function Home() {
       category: '1',
       date: '22/06 às 20:40h',
       description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10',
-    }
+    },
   ];
 
   function handleCategorySelected(categoryId: string) {
@@ -60,41 +60,38 @@ export function Home() {
   return (
     <Background>
 
-      <View>
-        <View style={styles.header}>
-          <Profile />
-          <ButtonAdd
-            onPress={handleAppointmentCreate}
-          />
-        </View>
-
-        <CategorySelect
-          categorySelected={category}
-          setCategory={handleCategorySelected}
-          hasCheckBox={true}
+      <View style={styles.header}>
+        <Profile />
+        <ButtonAdd
+          onPress={handleAppointmentCreate}
         />
-
-        <View style={styles.content}>
-          <ListHeader
-            title="Partidas agendadas"
-            subtitle="Total 6"
-          />
-
-          <FlatList
-            data={appointments}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              <Appointment
-                data={item}
-                onPress={handleAppontmentDetails}
-              />
-            )}
-            ItemSeparatorComponent={() => <ListDivider />}
-            style={styles.matches}
-            showsVerticalScrollIndicator={false}
-          />
-        </View>
       </View>
+
+      <CategorySelect
+        categorySelected={category}
+        setCategory={handleCategorySelected}
+        hasCheckBox={true}
+      />
+
+      <ListHeader
+        title="Partidas agendadas"
+        subtitle="Total 6"
+      />
+
+      <FlatList
+        data={appointments}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <Appointment
+            data={item}
+            onPress={handleAppontmentDetails}
+          />
+        )}
+        ItemSeparatorComponent={() => <ListDivider />}
+        contentContainerStyle={{ paddingBottom: 69 }}
+        style={styles.matches}
+        showsVerticalScrollIndicator={false}
+      />
     </Background>
   );
 }
