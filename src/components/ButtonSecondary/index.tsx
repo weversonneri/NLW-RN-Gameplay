@@ -1,21 +1,22 @@
 import React from 'react';
 import {
   Text,
-  View
+  View,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
 
 
-type Props = RectButtonProps & {
+type Props = TouchableOpacityProps & {
   title: string;
   isCancel?: boolean
 }
 
-export function Button({ title, isCancel, ...rest }: Props) {
+export function ButtonSecondary({ title, isCancel, ...rest }: Props) {
   return (
-    <RectButton
+    <TouchableOpacity
       style={styles.container}
       {...rest}
     >
@@ -24,6 +25,6 @@ export function Button({ title, isCancel, ...rest }: Props) {
           {title}
         </Text>
       </View>
-    </RectButton>
+    </TouchableOpacity>
   );
 }
