@@ -5,6 +5,7 @@ import {
   Platform,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -28,6 +29,7 @@ import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLLECTION_APPOINTMENTS } from '../../configs/storage';
+import { schema } from '../../validations/appointmentCreateForm';
 
 export function AppointmentCreate() {
   const [category, setCategory] = useState('');
@@ -60,23 +62,49 @@ export function AppointmentCreate() {
   }
 
   async function handleSave() {
-    const newAppointment = {
-      id: uuid.v4(),
-      guild,
-      category,
-      date: `${day}/${month} às ${hour}:${minute}h`,
-      description
-    };
+    try {
+      const newAppointment = {
+        id: uuid.v4(),
+        guild,
+        category,
+        date: `${day}/${month} às ${hour}:${minute}h`,
+        description
+      };
 
-    const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
-    const appointments = storage ? JSON.parse(storage) : [];
+      const formdata = {
+        guild,
+        category,
+        day,
+        month,
+        hour,
+        minute,
+        description
+      };
 
-    await AsyncStorage.setItem(
-      COLLECTION_APPOINTMENTS,
-      JSON.stringify([...appointments, newAppointment])
-    );
+      await schema.validate(formdata, {
+        abortEarly: false
+      });
 
-    navigation.navigate('Home');
+      // const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+      // const appointments = storage ? JSON.parse(storage) : [];
+
+      // await AsyncStorage.setItem(
+      //   COLLECTION_APPOINTMENTS,
+      //   JSON.stringify([...appointments, newAppointment])
+      // );
+      console.log(guild);
+      Alert.alert(
+        'Agendamento realizado com sucesso!',
+        'Nova partida agendada',
+      );
+
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert(
+        'Erro ao realizar o agendamento',
+        'Preencha todos os campos para realizar um novo agendamento',
+      );
+    }
   }
 
   return (
