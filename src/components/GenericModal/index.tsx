@@ -14,7 +14,7 @@ type Props = ModalProps & {
   closeModal: () => void;
 }
 
-export function LogoutModal({ children, closeModal, ...rest }: Props) {
+export function GenericModal({ children, closeModal, ...rest }: Props) {
   return (
     <Modal
       transparent

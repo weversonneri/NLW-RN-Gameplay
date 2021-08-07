@@ -5,7 +5,7 @@ import { styles } from './styles';
 import { Avatar } from '../Avatar';
 import { useAuth } from '../../hooks/auth';
 import { RectButton } from 'react-native-gesture-handler';
-import { LogoutModal } from '../LogoutModal';
+import { GenericModal } from '../GenericModal';
 import { Button } from '../Button';
 import { theme } from '../../global/styles/theme';
 import { ButtonSecondary } from '../ButtonSecondary';
@@ -53,7 +53,7 @@ export function Profile() {
 
       </View>
 
-      <LogoutModal
+      <GenericModal
         visible={openLogoutModal}
         closeModal={handleCloseModal}
       >
@@ -80,7 +80,7 @@ export function Profile() {
             </View>
           </View>
         </View>
-      </LogoutModal>
+      </GenericModal>
     </View>
   );
 }
