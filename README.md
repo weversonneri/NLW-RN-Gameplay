@@ -13,7 +13,7 @@
 </p>
 
 <h1 align="center">
-  <img alt="Preview" src="https://res.cloudinary.com/weversonneri/image/upload/v1628294144/gameplay-demo.gif" width="220" height="400" />
+  <img alt="Preview" src="https://user-images.githubusercontent.com/53442803/128610541-12cc16c9-11c2-4463-8af9-c9196382e46b.gif" width="220" height="400" />
 </h1>
 
 ## 📃 Sobre o projeto
