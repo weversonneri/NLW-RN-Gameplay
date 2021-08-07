@@ -5,7 +5,8 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'row',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    backgroundColor: theme.colors.secondary90
   },
   content: {
     flex: 1
@@ -59,6 +60,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 20
+  },
+  buttonRemove: {
+    width: 90,
+    height: 68,
+    backgroundColor: theme.colors.primary,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    right: 20,
+    paddingLeft: 10
   }
 
 });
