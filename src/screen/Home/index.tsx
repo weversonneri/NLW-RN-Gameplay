@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { ButtonAdd } from '../../components/ButtonAdd';
@@ -27,7 +27,7 @@ export function Home() {
     categoryId === category ? setCategory('') : setCategory(categoryId);
   }
 
-  function handleAppontmentDetails(guildSelected: AppointmentProps) {
+  function handleAppointmentDetails(guildSelected: AppointmentProps) {
     navigation.navigate('AppointmentDetails', { guildSelected });
   }
 
@@ -45,6 +45,31 @@ export function Home() {
       setAppointments(response);
     }
     setLoading(false);
+  }
+
+  async function handleRemoveAppointment(appointment: AppointmentProps) {
+    try {
+      const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+      const storagedAppointments = storage ? JSON.parse(storage) : [];
+
+      //delete storagedAppointments[appointment.id];
+      const filter = storagedAppointments.filter((item: AppointmentProps) => item.id !== appointment.id);
+
+      await AsyncStorage.setItem(
+        COLLECTION_APPOINTMENTS,
+        JSON.stringify(filter)
+      );
+
+      setAppointments((old) => (
+        old.filter((item) => item.id !== appointment.id)
+      ));
+
+    } catch (error) {
+      Alert.alert(
+        'Erro ao deletar agendamento',
+        'Algo de errado aconteceu ao deletar o agendamento',
+      );
+    }
   }
 
   useFocusEffect(useCallback(() => {
@@ -84,7 +109,8 @@ export function Home() {
               renderItem={({ item }) => (
                 <Appointment
                   data={item}
-                  onPress={() => handleAppontmentDetails(item)}
+                  onPress={() => handleAppointmentDetails(item)}
+                  handleRemove={() => handleRemoveAppointment(item)}
                 />
               )}
               ItemSeparatorComponent={() => <ListDivider />}

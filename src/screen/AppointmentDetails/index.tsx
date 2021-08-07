@@ -53,7 +53,7 @@ export function AppointmentDetails() {
       const response = await api.get(`/guilds/${guildSelected.guild.id}/widget.json`);
       setWidget(response.data);
     } catch (error) {
-      Alert.alert('Tem certeza que o Widget do servidor está ativado?');
+      Alert.alert('Erro ao carregar dados do servidor', 'Tem certeza que o Widget do servidor está ativado?');
     } finally {
       setLoading(false);
     }
@@ -118,7 +118,7 @@ export function AppointmentDetails() {
         <>
           <ListHeader
             title="Jogadores"
-            subtitle={`Total ${widget.members.length}`}
+            subtitle={`Total ${widget.members ? widget.members.length : '0'}`}
           />
 
           <FlatList

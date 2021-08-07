@@ -85,14 +85,15 @@ export function AppointmentCreate() {
         abortEarly: false
       });
 
-      // const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
-      // const appointments = storage ? JSON.parse(storage) : [];
+      const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+      const appointments = storage ? JSON.parse(storage) : [];
 
-      // await AsyncStorage.setItem(
-      //   COLLECTION_APPOINTMENTS,
-      //   JSON.stringify([...appointments, newAppointment])
-      // );
-      console.log(guild);
+      await AsyncStorage.setItem(
+        COLLECTION_APPOINTMENTS,
+        JSON.stringify([...appointments, newAppointment])
+      );
+
+
       Alert.alert(
         'Agendamento realizado com sucesso!',
         'Nova partida agendada',
@@ -238,3 +239,4 @@ export function AppointmentCreate() {
 
   );
 }
+
